@@ -2,10 +2,12 @@
 Async image download with cache
 
 How To Use
-- Add files to project
+- Add via Swift Package Manager, product `MGImageView`
 - load image with loadImage(url:) method
 
 ``loadImage(url: String)``
+
+Run tests with `swift test`. Tests use a stub `URLProtocol`, no network needed.
 
 ## Future Imrovements
 - Add Example Project

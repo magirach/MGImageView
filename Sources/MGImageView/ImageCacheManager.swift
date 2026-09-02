@@ -7,11 +7,13 @@
 //
 
 import Foundation
+#if canImport(UIKit)
 import UIKit
+#endif
 
-class MGImageCacheManager: NSObject {
+public class MGImageCacheManager: NSObject {
     
-    static let shared:  MGImageCacheManager = {
+    public static let shared:  MGImageCacheManager = {
         return MGImageCacheManager()
     }()
     
@@ -21,15 +23,21 @@ class MGImageCacheManager: NSObject {
     
     private let cache = NSCache<AnyObject, AnyObject>()
     
-    func cacheImage(imageData: Data, key: String) {
+    public func cacheImage(imageData: Data, key: String) {
         cache.setObject(imageData as AnyObject, forKey: key as AnyObject)
     }
     
-    func getImage(for key: String) -> UIImage? {
-        if let imgData = cache.object(forKey: key as AnyObject) as? Data {
+    public func getImageData(for key: String) -> Data? {
+        return cache.object(forKey: key as AnyObject) as? Data
+    }
+    
+    #if canImport(UIKit)
+    public func getImage(for key: String) -> UIImage? {
+        if let imgData = getImageData(for: key) {
             return UIImage(data: imgData)
         } else {
             return nil
         }
     }
+    #endif
 }

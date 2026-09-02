@@ -6,10 +6,11 @@
 //  Copyright © 2019 Moinuddin Girach. All rights reserved.
 //
 
+#if canImport(UIKit)
 import Foundation
 import UIKit
 
-class MGImageView: UIImageView {
+public class MGImageView: UIImageView {
     
     static var imageQueue = OperationQueue()
       
@@ -23,7 +24,7 @@ class MGImageView: UIImageView {
         }
     }
     
-    func loadImage(url:String?) {
+    public func loadImage(url:String?) {
         if let url = url {
             if let img = MGImageCacheManager.shared.getImage(for: url) {
                 self.image = img
@@ -74,3 +75,4 @@ class MGImageView: UIImageView {
         oparation?.cancel()
     }
 }
+#endif
